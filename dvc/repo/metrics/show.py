@@ -1,5 +1,6 @@
 import csv
 import errno
+from io import open
 import json
 import logging
 import os
@@ -9,10 +10,8 @@ from jsonpath_ng.ext import parse
 from dvc.exceptions import NoMetricsError
 from dvc.exceptions import OutputNotFoundError
 from dvc.repo import locked
-from dvc.utils.compat import builtin_str
 from dvc.utils.compat import csv_reader
-from dvc.utils.compat import open
-from dvc.utils.compat import StringIO
+from io import StringIO
 
 NO_METRICS_FILE_AT_REFERENCE_WARNING = (
     "Metrics file '{}' does not exist at the reference '{}'."
@@ -48,7 +47,7 @@ def _read_metric_hxsv(fd, hxsv_path, delimiter):
     row = indices[0]
     row = int(row) if row else None
     col = indices[1] if len(indices) > 1 and indices[1] else None
-    reader = list(csv.DictReader(fd, delimiter=builtin_str(delimiter)))
+    reader = list(csv.DictReader(fd, delimiter=str(delimiter)))
     return _do_read_metric_xsv(reader, row, col)
 
 
@@ -57,7 +56,7 @@ def _read_metric_xsv(fd, xsv_path, delimiter):
     row = indices[0]
     row = int(row) if row else None
     col = int(indices[1]) if len(indices) > 1 and indices[1] else None
-    reader = list(csv.reader(fd, delimiter=builtin_str(delimiter)))
+    reader = list(csv.reader(fd, delimiter=str(delimiter)))
     return _do_read_metric_xsv(reader, row, col)
 
 
@@ -102,7 +101,7 @@ def _format_csv(content, delimiter):
         "0.67528    0.289545        testing\n"
         "0.671502   0.297848        validation\n"
     """
-    reader = csv_reader(StringIO(content), delimiter=builtin_str(delimiter))
+    reader = csv_reader(StringIO(content), delimiter=str(delimiter))
     rows = [row for row in reader]
     max_widths = [max(map(len, column)) for column in zip(*rows)]
 

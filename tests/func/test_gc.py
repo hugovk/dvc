@@ -1,13 +1,13 @@
 import os
 
 import configobj
+import pathlib
 import pytest
 from git import Repo
 
 from dvc.exceptions import CollectCacheError
 from dvc.main import main
 from dvc.repo import Repo as DvcRepo
-from dvc.utils.compat import pathlib
 from tests.basic_env import TestDir
 from tests.basic_env import TestDvcGit
 

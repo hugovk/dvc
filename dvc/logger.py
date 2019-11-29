@@ -6,9 +6,7 @@ import logging.handlers
 import colorama
 
 from dvc.progress import Tqdm
-from dvc.utils.compat import RecursionError
-from dvc.utils.compat import str
-from dvc.utils.compat import StringIO
+from io import StringIO
 
 
 FOOTER = (

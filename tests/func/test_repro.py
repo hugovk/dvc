@@ -7,9 +7,11 @@ import shutil
 import uuid
 from subprocess import PIPE
 from subprocess import Popen
+from urllib.parse import urljoin
 
 import boto3
 import paramiko
+import pathlib
 import pytest
 from flaky.flaky_decorator import flaky
 from google.cloud import storage as gc
@@ -28,9 +30,6 @@ from dvc.stage import StageFileDoesNotExistError
 from dvc.system import System
 from dvc.utils import file_md5
 from dvc.utils import relpath
-from dvc.utils.compat import pathlib
-from dvc.utils.compat import str
-from dvc.utils.compat import urljoin
 from dvc.utils.stage import dump_stage_file
 from dvc.utils.stage import load_stage_file
 from tests.basic_env import TestDvc

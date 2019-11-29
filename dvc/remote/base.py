@@ -22,10 +22,7 @@ from dvc.state import StateNoop
 from dvc.utils import makedirs
 from dvc.utils import relpath
 from dvc.utils import tmp_fname
-from dvc.utils.compat import basestring
-from dvc.utils.compat import FileNotFoundError
-from dvc.utils.compat import str
-from dvc.utils.compat import urlparse
+from urllib.parse import urlparse
 from dvc.utils.fs import move
 from dvc.utils.http import open_url
 
@@ -159,7 +156,7 @@ class RemoteBASE:
 
     @classmethod
     def supported(cls, config):
-        if isinstance(config, basestring):
+        if isinstance(config, (str, bytes)):
             url = config
         else:
             url = config[Config.SECTION_REMOTE_URL]

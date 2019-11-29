@@ -22,7 +22,6 @@ from dvc.system import System
 from dvc.utils import file_md5
 from dvc.utils import LARGE_DIR_SIZE
 from dvc.utils import relpath
-from dvc.utils.compat import range
 from dvc.utils.stage import load_stage_file
 from tests.basic_env import TestDvc
 from tests.utils import get_gitignore_content

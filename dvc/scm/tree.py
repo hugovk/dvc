@@ -1,7 +1,7 @@
+from io import open
 import os
 
 from dvc.utils import dvc_walk
-from dvc.utils.compat import open
 
 
 class BaseTree:

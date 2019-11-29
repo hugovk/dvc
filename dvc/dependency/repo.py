@@ -5,7 +5,6 @@ from funcy import merge
 
 from .local import DependencyLOCAL
 from dvc.external_repo import external_repo
-from dvc.utils.compat import str
 
 
 class DependencyREPO(DependencyLOCAL):

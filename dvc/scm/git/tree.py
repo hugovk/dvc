@@ -1,11 +1,11 @@
 import errno
+from io import BytesIO
+from io import StringIO
 import os
 
 from dvc.exceptions import DvcException
 from dvc.scm.tree import BaseTree
 from dvc.utils import relpath
-from dvc.utils.compat import BytesIO
-from dvc.utils.compat import StringIO
 
 
 # see git-fast-import(1)

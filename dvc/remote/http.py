@@ -1,3 +1,4 @@
+from io import open
 import logging
 import threading
 
@@ -9,7 +10,6 @@ from dvc.exceptions import DvcException, HTTPError
 from dvc.progress import Tqdm
 from dvc.remote.base import RemoteBASE
 from dvc.scheme import Schemes
-from dvc.utils.compat import open
 
 logger = logging.getLogger(__name__)
 

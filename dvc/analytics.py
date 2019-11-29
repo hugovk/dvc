@@ -7,7 +7,6 @@ import os
 
 from dvc import __version__
 from dvc.utils import env2bool
-from dvc.utils.compat import str
 
 
 logger = logging.getLogger(__name__)

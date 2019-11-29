@@ -1,12 +1,12 @@
 import os
 from contextlib import contextmanager
+from urllib.parse import urlparse
 
 try:
     from contextlib import _GeneratorContextManager as GCM
 except ImportError:
     from contextlib import GeneratorContextManager as GCM
 
-from dvc.utils.compat import urlparse
 from dvc.repo import Repo
 from dvc.external_repo import external_repo
 

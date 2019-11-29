@@ -44,7 +44,7 @@ SCHEMA[DependencyREPO.PARAM_REPO] = DependencyREPO.REPO_SCHEMA
 
 
 def _get(stage, p, info):
-    from dvc.utils.compat import urlparse
+    from urllib.parse import urlparse
 
     parsed = urlparse(p)
 

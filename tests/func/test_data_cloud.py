@@ -30,7 +30,6 @@ from dvc.remote.base import STATUS_NEW
 from dvc.remote.base import STATUS_OK
 from dvc.utils import env2bool
 from dvc.utils import file_md5
-from dvc.utils.compat import str
 from dvc.utils.stage import dump_stage_file
 from dvc.utils.stage import load_stage_file
 from tests.basic_env import TestDvc

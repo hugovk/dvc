@@ -11,12 +11,11 @@ from .basic_env import TestGitFixture
 from dvc.remote.config import RemoteConfig
 from dvc.remote.ssh.connection import SSHConnection
 from dvc.repo import Repo as DvcRepo
-from dvc.utils.compat import cast_bytes_py2
 
 # Prevent updater and analytics from running their processes
-os.environ[cast_bytes_py2("DVC_TEST")] = cast_bytes_py2("true")
+os.environ["DVC_TEST"] = "true"
 # Ensure progress output even when not outputting to raw sys.stderr console
-os.environ[cast_bytes_py2("DVC_IGNORE_ISATTY")] = cast_bytes_py2("true")
+os.environ["DVC_IGNORE_ISATTY"] = "true"
 
 
 @pytest.fixture(autouse=True)

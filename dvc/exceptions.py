@@ -3,8 +3,6 @@
 import traceback
 
 from dvc.utils import relpath
-from dvc.utils.compat import builtin_str
-from dvc.utils.compat import str
 
 
 class DvcException(Exception):
@@ -38,10 +36,10 @@ class OutputDuplicationError(DvcException):
     """
 
     def __init__(self, output, stages):
-        assert isinstance(output, str) or isinstance(output, builtin_str)
+        assert isinstance(output, str) or isinstance(output, str)
         assert isinstance(stages, list)
         assert all(
-            isinstance(stage, str) or isinstance(stage, builtin_str)
+            isinstance(stage, str) or isinstance(stage, str)
             for stage in stages
         )
         msg = (
@@ -79,8 +77,8 @@ class StagePathAsOutputError(DvcException):
     """
 
     def __init__(self, wdir, fname):
-        assert isinstance(wdir, str) or isinstance(wdir, builtin_str)
-        assert isinstance(fname, str) or isinstance(fname, builtin_str)
+        assert isinstance(wdir, str) or isinstance(wdir, str)
+        assert isinstance(fname, str) or isinstance(fname, str)
         msg = (
             "current working directory '{cwd}' is specified as an output in "
             "'{fname}'. Use another CWD to prevent any data removal.".format(
@@ -99,7 +97,7 @@ class CircularDependencyError(DvcException):
     """
 
     def __init__(self, dependency):
-        assert isinstance(dependency, (str, builtin_str))
+        assert isinstance(dependency, (str, str))
 
         msg = (
             "file/directory '{}' is specified as an output and as a "
@@ -117,7 +115,7 @@ class ArgumentDuplicationError(DvcException):
     """
 
     def __init__(self, path):
-        assert isinstance(path, (str, builtin_str))
+        assert isinstance(path, (str, str))
         msg = "file '{}' is specified more than once."
         super().__init__(msg.format(path))
 

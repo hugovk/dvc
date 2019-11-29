@@ -3,6 +3,7 @@ import os
 from contextlib import contextmanager
 from functools import wraps
 from itertools import chain
+from io import open as _open
 
 from funcy import cached_property
 
@@ -19,9 +20,7 @@ from dvc.path_info import PathInfo
 from dvc.remote.base import RemoteActionNotImplemented
 from dvc.utils import relpath
 from dvc.utils.fs import path_isin
-from dvc.utils.compat import FileNotFoundError
 from dvc.utils.compat import fspath_py35
-from dvc.utils.compat import open as _open
 
 
 logger = logging.getLogger(__name__)

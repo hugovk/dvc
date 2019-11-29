@@ -2,6 +2,7 @@
 
 import copy
 import errno
+from io import open
 import logging
 import os
 import re
@@ -12,8 +13,6 @@ from voluptuous import All, Any, Lower, Range, Coerce, Match
 
 from dvc.exceptions import DvcException
 from dvc.exceptions import NotDvcRepoError
-from dvc.utils.compat import open
-from dvc.utils.compat import str
 
 logger = logging.getLogger(__name__)
 

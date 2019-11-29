@@ -5,26 +5,8 @@ import os
 import sys
 from contextlib import contextmanager
 
-# Syntax sugar.
-_ver = sys.version_info
-
-#: Python 2.x?
-is_py2 = _ver[0] == 2
-
-#: Python 3.x?
-is_py3 = _ver[0] == 3
-
 # simplified version of ipython_genutils/encoding.py
 DEFAULT_ENCODING = sys.getdefaultencoding()
-
-if _ver[:2] < (3, 5):
-    RecursionError = RuntimeError
-else:
-    RecursionError = RecursionError
-
-
-def no_code(x, encoding=None):
-    return x
 
 
 def encode(u, encoding=None):
@@ -42,19 +24,9 @@ def csv_reader(unicode_csv_data, dialect=None, **kwargs):
 
     dialect = dialect or csv.excel
 
-    if is_py3:
-        # Python3 supports encoding by default, so just return the object
-        for row in csv.reader(unicode_csv_data, dialect=dialect, **kwargs):
-            yield [cell for cell in row]
-
-    else:
-        # csv.py doesn't do Unicode; encode temporarily as UTF-8:
-        reader = csv.reader(
-            utf_8_encoder(unicode_csv_data), dialect=dialect, **kwargs
-        )
-        for row in reader:
-            # decode UTF-8 back to Unicode, cell by cell:
-            yield [unicode(cell, "utf-8") for cell in row]  # noqa: F821
+    # Python3 supports encoding by default, so just return the object
+    for row in csv.reader(unicode_csv_data, dialect=dialect, **kwargs):
+        yield [cell for cell in row]
 
 
 def utf_8_encoder(unicode_csv_data):
@@ -100,84 +72,6 @@ def ignore_file_not_found():
     except OSError as exc:
         if exc.errno != errno.ENOENT:
             raise
-
-
-if is_py2:
-    from urlparse import urlparse, urlunparse, urljoin  # noqa: F401
-    from urllib import urlencode  # noqa: F401
-    import ConfigParser  # noqa: F401
-    from io import open  # noqa: F401
-    import pathlib2 as pathlib  # noqa: F401
-    from collections import Mapping  # noqa: F401
-    from contextlib2 import ExitStack  # noqa: F401
-
-    builtin_str = str  # noqa: F821
-    bytes = str  # noqa: F821
-    str = unicode  # noqa: F821
-    basestring = basestring  # noqa: F821
-    numeric_types = (int, long, float)  # noqa: F821
-    integer_types = (int, long)  # noqa: F821
-    input = raw_input  # noqa: F821
-    cast_bytes_py2 = cast_bytes
-    makedirs = _makedirs
-    range = xrange  # noqa: F821
-    FileNotFoundError = IOError
-
-    import StringIO
-    import io
-
-    class StringIO(StringIO.StringIO):
-        def __enter__(self):
-            return self
-
-        def __exit__(self, *args):
-            self.close()
-
-    class BytesIO(io.BytesIO):
-        def __enter__(self):
-            return self
-
-        def __exit__(self, *args):
-            self.close()
-
-    def convert_to_unicode(data):
-        if isinstance(data, builtin_str):
-            return str(data)
-        if isinstance(data, dict):
-            return dict(map(convert_to_unicode, data.items()))
-        if isinstance(data, (list, tuple)):
-            return type(data)(map(convert_to_unicode, data))
-        return data
-
-
-elif is_py3:
-    import pathlib  # noqa: F401
-    from os import makedirs  # noqa: F401
-    from urllib.parse import (  # noqa: F401
-        urlparse,  # noqa: F401
-        urlunparse,  # noqa: F401
-        urlencode,  # noqa: F401
-        urljoin,  # noqa: F401
-    )
-    from io import StringIO, BytesIO  # noqa: F401
-    import configparser as ConfigParser  # noqa: F401
-    from collections.abc import Mapping  # noqa: F401
-    from contextlib import ExitStack  # noqa: F401
-
-    builtin_str = str  # noqa: F821
-    str = str  # noqa: F821
-    bytes = bytes  # noqa: F821
-    basestring = (str, bytes)  # noqa: F821
-    numeric_types = (int, float)  # noqa: F821
-    integer_types = (int,)  # noqa: F821
-    input = input  # noqa: F821
-    open = open  # noqa: F821
-    cast_bytes_py2 = no_code
-    range = range  # noqa: F821
-    FileNotFoundError = FileNotFoundError
-
-    def convert_to_unicode(data):
-        return data
 
 
 # Backport os.fspath() from Python 3.6

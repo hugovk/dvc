@@ -3,6 +3,7 @@ import os
 import re
 from datetime import datetime, timedelta
 import threading
+from urllib.parse import urlparse
 
 from funcy import cached_property, wrap_prop
 
@@ -11,7 +12,6 @@ from dvc.path_info import CloudURLInfo
 from dvc.progress import Tqdm
 from dvc.remote.base import RemoteBASE
 from dvc.scheme import Schemes
-from dvc.utils.compat import urlparse
 
 
 logger = logging.getLogger(__name__)

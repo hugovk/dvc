@@ -1,6 +1,7 @@
 """Helpers for other modules."""
 
 import hashlib
+from io import open
 import json
 import logging
 import math
@@ -14,14 +15,9 @@ import nanotime
 from ruamel.yaml import YAML
 from shortuuid import uuid
 
-from dvc.utils.compat import builtin_str
-from dvc.utils.compat import cast_bytes_py2
 from dvc.utils.compat import fspath
 from dvc.utils.compat import fspath_py35
-from dvc.utils.compat import makedirs as _makedirs
-from dvc.utils.compat import open
-from dvc.utils.compat import str
-from dvc.utils.compat import StringIO
+from io import StringIO
 
 
 logger = logging.getLogger(__name__)
@@ -91,7 +87,7 @@ def dict_filter(d, exclude=()):
     """
 
     def fix_key(k):
-        return str(k) if isinstance(k, builtin_str) else k
+        return str(k) if isinstance(k, str) else k
 
     if isinstance(d, list):
         return [dict_filter(e, exclude) for e in d]
@@ -145,7 +141,7 @@ def makedirs(path, exist_ok=False, mode=None):
     path = fspath_py35(path)
 
     if mode is None:
-        _makedirs(path, exist_ok=exist_ok)
+        os.makedirs(path, exist_ok=exist_ok)
         return
 
     # utilize umask to set proper permissions since Python 3.7 the `mode`
@@ -153,7 +149,7 @@ def makedirs(path, exist_ok=False, mode=None):
     # newly-created intermediate-level directories.
     umask = os.umask(0o777 - mode)
     try:
-        _makedirs(path, exist_ok=exist_ok)
+        os.makedirs(path, exist_ok=exist_ok)
     finally:
         os.umask(umask)
 
@@ -208,7 +204,7 @@ def fix_env(env=None):
         lp_orig = env.get(lp_key + "_ORIG", None)
         if lp_orig is not None:
             # NOTE: py2 doesn't like unicode strings in environ
-            env[cast_bytes_py2(lp_key)] = cast_bytes_py2(lp_orig)
+            env[lp_key] = lp_orig
         else:
             env.pop(lp_key, None)
 
@@ -411,7 +407,7 @@ def env2bool(var, undefined=False):
 
 
 def resolve_output(inp, out):
-    from dvc.utils.compat import urlparse
+    from urllib.parse import urlparse
 
     name = os.path.basename(urlparse(inp).path)
     if not out:

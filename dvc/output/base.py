@@ -1,5 +1,6 @@
 import logging
 from copy import copy
+from urllib.parse import urlparse
 
 from voluptuous import Any
 
@@ -8,8 +9,6 @@ from dvc.cache import NamedCache
 from dvc.exceptions import CollectCacheError
 from dvc.exceptions import DvcException
 from dvc.remote.base import RemoteBASE
-from dvc.utils.compat import str
-from dvc.utils.compat import urlparse
 
 
 logger = logging.getLogger(__name__)

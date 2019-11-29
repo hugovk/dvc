@@ -1,3 +1,4 @@
+from io import open
 import yaml
 from ruamel.yaml import YAML
 from ruamel.yaml.error import YAMLError
@@ -8,7 +9,6 @@ except ImportError:
     from yaml import SafeLoader
 
 from dvc.exceptions import StageFileCorruptedError
-from dvc.utils.compat import open
 
 
 def load_stage_file(path):

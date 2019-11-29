@@ -14,7 +14,6 @@ from dvc.utils import fspath
 from dvc.utils import fspath_py35
 from dvc.utils import relpath
 from dvc.utils import walk_files
-from dvc.utils.compat import str
 
 
 logger = logging.getLogger(__name__)

@@ -1,6 +1,5 @@
 import getpass
 import os
-import sys
 from unittest import TestCase
 
 import pytest
@@ -47,11 +46,6 @@ Host example.com
    IdentityFile ~/.ssh/not_default.key
 """
 
-if sys.version_info.major == 3:
-    builtin_module_name = "builtins"
-else:
-    builtin_module_name = "__builtin__"
-
 
 @pytest.mark.parametrize(
     "config,expected_host",
@@ -62,9 +56,7 @@ else:
 )
 @patch("os.path.exists", return_value=True)
 @patch(
-    "{}.open".format(builtin_module_name),
-    new_callable=mock_open,
-    read_data=mock_ssh_config,
+    "builtins.open", new_callable=mock_open, read_data=mock_ssh_config,
 )
 def test_ssh_host_override_from_config(
     mock_file, mock_exists, config, expected_host
@@ -92,9 +84,7 @@ def test_ssh_host_override_from_config(
 )
 @patch("os.path.exists", return_value=True)
 @patch(
-    "{}.open".format(builtin_module_name),
-    new_callable=mock_open,
-    read_data=mock_ssh_config,
+    "builtins.open", new_callable=mock_open, read_data=mock_ssh_config,
 )
 def test_ssh_user(mock_file, mock_exists, config, expected_user):
     remote = RemoteSSH(None, config)
@@ -117,9 +107,7 @@ def test_ssh_user(mock_file, mock_exists, config, expected_user):
 )
 @patch("os.path.exists", return_value=True)
 @patch(
-    "{}.open".format(builtin_module_name),
-    new_callable=mock_open,
-    read_data=mock_ssh_config,
+    "builtins.open", new_callable=mock_open, read_data=mock_ssh_config,
 )
 def test_ssh_port(mock_file, mock_exists, config, expected_port):
     remote = RemoteSSH(None, config)
@@ -152,9 +140,7 @@ def test_ssh_port(mock_file, mock_exists, config, expected_port):
 )
 @patch("os.path.exists", return_value=True)
 @patch(
-    "{}.open".format(builtin_module_name),
-    new_callable=mock_open,
-    read_data=mock_ssh_config,
+    "builtins.open", new_callable=mock_open, read_data=mock_ssh_config,
 )
 def test_ssh_keyfile(mock_file, mock_exists, config, expected_keyfile):
     remote = RemoteSSH(None, config)
@@ -174,9 +160,7 @@ def test_ssh_keyfile(mock_file, mock_exists, config, expected_keyfile):
 )
 @patch("os.path.exists", return_value=True)
 @patch(
-    "{}.open".format(builtin_module_name),
-    new_callable=mock_open,
-    read_data=mock_ssh_config,
+    "builtins.open", new_callable=mock_open, read_data=mock_ssh_config,
 )
 def test_ssh_gss_auth(mock_file, mock_exists, config, expected_gss_auth):
     remote = RemoteSSH(None, config)
