@@ -78,7 +78,7 @@ class Tqdm(tqdm):
             desc=desc,
             bar_format="!",
             lock_args=(False,),
-            **kwargs
+            **kwargs,
         )
         if bar_format is None:
             if self.__len__():

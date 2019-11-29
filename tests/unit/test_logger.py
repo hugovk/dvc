@@ -121,7 +121,7 @@ class TestColorFormatter:
                 "{red}{line}{nc}\n".format(
                     line="-" * 60,
                     stack_trace="\n".join([first_traceback, second_traceback]),
-                    **colors
+                    **colors,
                 )
             )
 
