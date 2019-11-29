@@ -2,7 +2,6 @@ import logging
 import os
 
 import colorama
-from six import string_types
 
 from . import locked
 from dvc.exceptions import RecursiveAddingWhileUsingFilename

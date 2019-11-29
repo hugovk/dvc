@@ -7,8 +7,8 @@ def test_destroy(repo_dir, dvc_repo):
     # NOTE: using symlink to ensure that data was unprotected after `destroy`
     dvc_repo.config.set("cache", "type", "symlink")
 
-    foo_stage, = dvc_repo.add(repo_dir.FOO)
-    data_dir_stage, = dvc_repo.add(repo_dir.DATA_DIR)
+    (foo_stage,) = dvc_repo.add(repo_dir.FOO)
+    (data_dir_stage,) = dvc_repo.add(repo_dir.DATA_DIR)
 
     dvc_repo.destroy()
 

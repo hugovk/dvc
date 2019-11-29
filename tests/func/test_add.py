@@ -171,7 +171,7 @@ class TestAddModifiedDir(TestDvc):
 
 
 def test_add_file_in_dir(repo_dir, dvc_repo):
-    stage, = dvc_repo.add(repo_dir.DATA_SUB)
+    (stage,) = dvc_repo.add(repo_dir.DATA_SUB)
 
     assert stage is not None
     assert len(stage.deps) == 0

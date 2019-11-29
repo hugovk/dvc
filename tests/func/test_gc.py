@@ -213,7 +213,7 @@ def _count_files(path):
 def test_gc_no_dir_cache(repo_dir, dvc_repo):
     dvc_repo.add(repo_dir.FOO)
     dvc_repo.add(repo_dir.BAR)
-    dir_stage, = dvc_repo.add(repo_dir.DATA_DIR)
+    (dir_stage,) = dvc_repo.add(repo_dir.DATA_DIR)
 
     os.unlink(dir_stage.outs[0].cache_path)
 

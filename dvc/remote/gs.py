@@ -1,7 +1,6 @@
 import logging
 from datetime import timedelta
 from functools import wraps
-import io
 import os.path
 import threading
 

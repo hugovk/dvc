@@ -27,9 +27,7 @@ class ConfigError(DvcException):
     """
 
     def __init__(self, msg, cause=None):
-        super().__init__(
-            "config file error: {}".format(msg), cause=cause
-        )
+        super().__init__("config file error: {}".format(msg), cause=cause)
 
 
 class NoRemoteError(ConfigError):
