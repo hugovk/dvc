@@ -25,9 +25,9 @@ def sizeof_fmt(num, suffix="B"):
     """ Convert number of bytes to human-readable string """
     for unit in ["", "K", "M", "G", "T", "P", "E", "Z"]:
         if abs(num) < 1024.0:
-            return "%3.1f%s%s" % (num, unit, suffix)
+            return "{:3.1f}{}{}".format(num, unit, suffix)
         num /= 1024.0
-    return "%.1f%s%s" % (num, "Y", suffix)
+    return "{:.1f}{}{}".format(num, "Y", suffix)
 
 
 class SSHConnection:
@@ -103,7 +103,7 @@ class SSHConnection:
         if tail:
             try:
                 self.sftp.mkdir(path)
-            except IOError as e:
+            except OSError as e:
                 # Since paramiko errors are very vague we need to recheck
                 # whether it's because path already exists or something else
                 if e.errno == errno.EACCES or not self.exists(path):
@@ -119,7 +119,7 @@ class SSHConnection:
         # [1] https://github.com/python/cpython/blob/master/Lib/os.py
         try:
             dir_entries = self.sftp.listdir_attr(directory)
-        except IOError as exc:
+        except OSError as exc:
             raise DvcException(
                 "couldn't get the '{}' remote directory files list".format(
                     directory
@@ -141,8 +141,7 @@ class SSHConnection:
 
         for dname in dirs:
             newpath = posixpath.join(directory, dname)
-            for entry in self.walk(newpath, topdown=topdown):
-                yield entry
+            yield from self.walk(newpath, topdown=topdown)
 
         if not topdown:
             yield directory, dirs, nondirs

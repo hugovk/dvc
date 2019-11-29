@@ -53,9 +53,9 @@ class GitTree(BaseTree):
         obj = self.git_object_by_path(path)
         if obj is None:
             msg = "No such file in branch '{}'".format(self.rev)
-            raise IOError(errno.ENOENT, msg, relative_path)
+            raise OSError(errno.ENOENT, msg, relative_path)
         if obj.mode == GIT_MODE_DIR:
-            raise IOError(errno.EISDIR, "Is a directory", relative_path)
+            raise OSError(errno.EISDIR, "Is a directory", relative_path)
 
         # GitPython's obj.data_stream is a fragile thing, it is better to
         # read it immediately, also it needs to be to decoded if we follow
@@ -130,8 +130,7 @@ class GitTree(BaseTree):
             yield os.path.normpath(tree.abspath), dirs, nondirs
 
         for i in dirs:
-            for x in self._walk(tree[i], topdown=True):
-                yield x
+            yield from self._walk(tree[i], topdown=True)
 
         if not topdown:
             yield os.path.normpath(tree.abspath), dirs, nondirs
@@ -146,7 +145,6 @@ class GitTree(BaseTree):
 
         tree = self.git_object_by_path(top)
         if tree is None:
-            raise IOError(errno.ENOENT, "No such file")
+            raise OSError(errno.ENOENT, "No such file")
 
-        for x in self._walk(tree, topdown):
-            yield x
+        yield from self._walk(tree, topdown)

@@ -1,6 +1,4 @@
 """Draws DAG in ASCII."""
-from __future__ import print_function
-from __future__ import unicode_literals
 
 import math
 import sys
@@ -13,7 +11,7 @@ from grandalf.routing import EdgeViewer
 from grandalf.routing import route_with_lines
 
 
-class VertexViewer(object):
+class VertexViewer:
     """Class to define vertex box boundaries that will be accounted for during
     graph building by grandalf.
 
@@ -39,7 +37,7 @@ class VertexViewer(object):
         return self._w
 
 
-class AsciiCanvas(object):
+class AsciiCanvas:
     """Class for drawing in ASCII.
 
     Args:
@@ -198,21 +196,21 @@ class AsciiCanvas(object):
                 if dx == 0:
                     y = y0
                 else:
-                    y = y0 + int(round((x - x0) * dy / float((dx))))
+                    y = y0 + int(round((x - x0) * dy / float(dx)))
                 self.point(x, y, char)
         elif y0 < y1:
             for y in range(y0, y1 + 1):
                 if dy == 0:
                     x = x0
                 else:
-                    x = x0 + int(round((y - y0) * dx / float((dy))))
+                    x = x0 + int(round((y - y0) * dx / float(dy)))
                 self.point(x, y, char)
         else:
             for y in range(y1, y0 + 1):
                 if dy == 0:
                     x = x0
                 else:
-                    x = x1 + int(round((y - y1) * dx / float((dy))))
+                    x = x1 + int(round((y - y1) * dx / float(dy)))
                 self.point(x, y, char)
 
     def text(self, x, y, text):

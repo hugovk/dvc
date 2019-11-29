@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import logging
 import os
 from contextlib import contextmanager
@@ -41,7 +39,7 @@ def locked(f):
     return wrapper
 
 
-class Repo(object):
+class Repo:
     DVC_DIR = ".dvc"
 
     from dvc.repo.destroy import destroy

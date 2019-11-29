@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import csv
 import errno
 import json
@@ -243,7 +241,7 @@ def _read_metrics(repo, metrics, branch):
                 metric = _read_metric(
                     fd, typ=typ, xpath=xpath, fname=str(out), branch=branch
                 )
-        except IOError as e:
+        except OSError as e:
             if e.errno == errno.ENOENT:
                 logger.warning(
                     NO_METRICS_FILE_AT_REFERENCE_WARNING.format(

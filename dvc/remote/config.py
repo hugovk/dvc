@@ -11,7 +11,7 @@ from dvc.utils.compat import urlparse
 logger = logging.getLogger(__name__)
 
 
-class RemoteConfig(object):
+class RemoteConfig:
     def __init__(self, config):
         self.config = config
 

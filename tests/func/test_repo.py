@@ -9,7 +9,7 @@ from tests.basic_env import TestDvcGit
 
 class TestCollect(TestDvcGit):
     def setUp(self):
-        super(TestCollect, self).setUp()
+        super().setUp()
         self.dvc.add(self.FOO)
         self.dvc.run(
             deps=[self.FOO],

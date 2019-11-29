@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import logging
 
 import colorama
@@ -36,7 +34,7 @@ def append_doc_link(help_message, path):
     )
 
 
-class CmdBase(object):
+class CmdBase:
     def __init__(self, args):
         from dvc.repo import Repo
         from dvc.updater import Updater

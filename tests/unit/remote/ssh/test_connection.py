@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import filecmp
 import os
 import platform
@@ -65,7 +63,7 @@ def test_walk(tmp_path, ssh):
         dir_data_path,
         subdir_data_path,
     ]
-    expected = set([entry.absolute().as_posix() for entry in entries])
+    expected = {entry.absolute().as_posix() for entry in entries}
 
     paths = set()
     for root, dirs, files in ssh.walk(root_path.absolute().as_posix()):

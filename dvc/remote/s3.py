@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 import logging
 import os
 import threading
@@ -25,7 +22,7 @@ class RemoteS3(RemoteBASE):
     PARAM_CHECKSUM = "etag"
 
     def __init__(self, repo, config):
-        super(RemoteS3, self).__init__(repo, config)
+        super().__init__(repo, config)
 
         url = config.get(Config.SECTION_REMOTE_URL, "s3://")
         self.path_info = self.path_cls(url)
@@ -196,8 +193,7 @@ class RemoteS3(RemoteBASE):
             contents = page.get("Contents", None)
             if not contents:
                 continue
-            for item in contents:
-                yield item
+            yield from contents
 
     def _list_paths(self, path_info, max_items=None):
         return (

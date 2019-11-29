@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import filecmp
 import os
 from uuid import uuid4
@@ -47,7 +45,7 @@ class TestDefaultOutput(TestDvc):
 
 class TestShouldRemoveOutsBeforeImport(TestDvc):
     def setUp(self):
-        super(TestShouldRemoveOutsBeforeImport, self).setUp()
+        super().setUp()
         tmp_dir = self.mkdtemp()
         self.external_source = os.path.join(tmp_dir, "file")
         with open(self.external_source, "w") as fobj:
@@ -66,7 +64,7 @@ class TestShouldRemoveOutsBeforeImport(TestDvc):
 
 class TestImportFilename(TestDvc):
     def setUp(self):
-        super(TestImportFilename, self).setUp()
+        super().setUp()
         tmp_dir = self.mkdtemp()
         self.external_source = os.path.join(tmp_dir, "file")
         with open(self.external_source, "w") as fobj:

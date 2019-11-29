@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import logging
 import os
 
@@ -23,7 +21,7 @@ def add(repo, targets, recursive=False, no_commit=False, fname=None):
     if recursive and fname:
         raise RecursiveAddingWhileUsingFilename()
 
-    if isinstance(targets, string_types):
+    if isinstance(targets, str):
         targets = [targets]
 
     stages_list = []

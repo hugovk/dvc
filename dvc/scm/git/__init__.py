@@ -1,5 +1,4 @@
 """Manages Git."""
-from __future__ import unicode_literals
 
 import logging
 import os
@@ -43,7 +42,7 @@ class Git(Base):
         """Git class constructor.
         Requires `Repo` class from `git` module (from gitpython package).
         """
-        super(Git, self).__init__(root_dir)
+        super().__init__(root_dir)
 
         import git
         from git.exc import InvalidGitRepositoryError

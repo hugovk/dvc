@@ -1,6 +1,3 @@
-# encoding: utf-8
-from __future__ import unicode_literals
-
 from os.path import join
 
 from dvc.ignore import DvcIgnoreFilter
@@ -14,7 +11,7 @@ from tests.basic_env import TestGitSubmodule
 
 class TestWorkingTree(TestDir):
     def setUp(self):
-        super(TestWorkingTree, self).setUp()
+        super().setUp()
         self.tree = WorkingTree()
 
     def test_open(self):
@@ -39,7 +36,7 @@ class TestWorkingTree(TestDir):
         self.assertFalse(self.tree.isfile("not-existing-file"))
 
 
-class GitTreeTests(object):
+class GitTreeTests:
     def test_open(self):
         self.scm.add([self.FOO, self.UNICODE, self.DATA_DIR])
         self.scm.commit("add")
@@ -80,20 +77,20 @@ class GitTreeTests(object):
 
 class TestGitTree(TestGit, GitTreeTests):
     def setUp(self):
-        super(TestGitTree, self).setUp()
+        super().setUp()
         self.scm = SCM(self._root_dir)
         self.tree = GitTree(self.git, "master")
 
 
 class TestGitSubmoduleTree(TestGitSubmodule, GitTreeTests):
     def setUp(self):
-        super(TestGitSubmoduleTree, self).setUp()
+        super().setUp()
         self.scm = SCM(self._root_dir)
         self.tree = GitTree(self.git, "master")
         self._pushd(self._root_dir)
 
 
-class AssertWalkEqualMixin(object):
+class AssertWalkEqualMixin:
     def assertWalkEqual(self, actual, expected, msg=None):
         def convert_to_sets(walk_results):
             return [

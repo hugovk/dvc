@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from dvc.utils.compat import pathlib, str
 import logging
 import os
@@ -32,13 +30,13 @@ logger = logging.getLogger(__name__)
 class StageCmdFailedError(DvcException):
     def __init__(self, stage):
         msg = "stage '{}' cmd '{}' failed".format(stage.relpath, stage.cmd)
-        super(StageCmdFailedError, self).__init__(msg)
+        super().__init__(msg)
 
 
 class StageFileFormatError(DvcException):
     def __init__(self, fname, e):
         msg = "DVC-file '{}' format error: {}".format(fname, str(e))
-        super(StageFileFormatError, self).__init__(msg)
+        super().__init__(msg)
 
 
 class StageFileDoesNotExistError(DvcException):
@@ -49,13 +47,13 @@ class StageFileDoesNotExistError(DvcException):
         if Stage.is_stage_file(sname):
             msg += " Do you mean '{}'?".format(sname)
 
-        super(StageFileDoesNotExistError, self).__init__(msg)
+        super().__init__(msg)
 
 
 class StageFileAlreadyExistsError(DvcException):
     def __init__(self, relpath):
         msg = "stage '{}' already exists".format(relpath)
-        super(StageFileAlreadyExistsError, self).__init__(msg)
+        super().__init__(msg)
 
 
 class StageFileIsNotDvcFileError(DvcException):
@@ -66,30 +64,30 @@ class StageFileIsNotDvcFileError(DvcException):
         if Stage.is_stage_file(sname):
             msg += " Do you mean '{}'?".format(sname)
 
-        super(StageFileIsNotDvcFileError, self).__init__(msg)
+        super().__init__(msg)
 
 
 class StageFileBadNameError(DvcException):
     def __init__(self, msg):
-        super(StageFileBadNameError, self).__init__(msg)
+        super().__init__(msg)
 
 
 class StagePathOutsideError(DvcException):
     def __init__(self, path):
         msg = "stage working or file path '{}' is outside of dvc repo"
-        super(StagePathOutsideError, self).__init__(msg.format(path))
+        super().__init__(msg.format(path))
 
 
 class StagePathNotFoundError(DvcException):
     def __init__(self, path):
         msg = "stage working or file path '{}' does not exist"
-        super(StagePathNotFoundError, self).__init__(msg.format(path))
+        super().__init__(msg.format(path))
 
 
 class StagePathNotDirectoryError(DvcException):
     def __init__(self, path):
         msg = "stage working or file path '{}' is not directory"
-        super(StagePathNotDirectoryError, self).__init__(msg.format(path))
+        super().__init__(msg.format(path))
 
 
 class StageCommitError(DvcException):
@@ -98,7 +96,7 @@ class StageCommitError(DvcException):
 
 class StageUpdateError(DvcException):
     def __init__(self, path):
-        super(StageUpdateError, self).__init__(
+        super().__init__(
             "update is not supported for '{}' that is not an "
             "import.".format(path)
         )
@@ -114,7 +112,7 @@ class MissingDep(DvcException):
             dep = "dependency"
 
         msg = "missing {}: {}".format(dep, ", ".join(map(str, deps)))
-        super(MissingDep, self).__init__(msg)
+        super().__init__(msg)
 
 
 class MissingDataSource(DvcException):
@@ -126,10 +124,10 @@ class MissingDataSource(DvcException):
             source += "s"
 
         msg = "missing data {}: {}".format(source, ", ".join(missing_files))
-        super(MissingDataSource, self).__init__(msg)
+        super().__init__(msg)
 
 
-class Stage(object):
+class Stage:
     STAGE_FILE = "Dvcfile"
     STAGE_FILE_SUFFIX = ".dvc"
 
@@ -784,9 +782,9 @@ class Stage(object):
     def _check_circular_dependency(self):
         from dvc.exceptions import CircularDependencyError
 
-        circular_dependencies = set(d.path_info for d in self.deps) & set(
+        circular_dependencies = {d.path_info for d in self.deps} & {
             o.path_info for o in self.outs
-        )
+        }
 
         if circular_dependencies:
             raise CircularDependencyError(str(circular_dependencies.pop()))

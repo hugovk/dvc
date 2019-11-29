@@ -1,5 +1,4 @@
 """Manages logging configuration for dvc repo."""
-from __future__ import unicode_literals
 
 import logging.config
 import logging.handlers
@@ -26,7 +25,7 @@ FOOTER = (
 class LoggingException(Exception):
     def __init__(self, record):
         msg = "failed to log {}".format(str(record))
-        super(LoggingException, self).__init__(msg)
+        super().__init__(msg)
 
 
 class ExcludeErrorsFilter(logging.Filter):
@@ -150,7 +149,7 @@ class ColorFormatter(logging.Formatter):
 
 class LoggerHandler(logging.StreamHandler):
     def handleError(self, record):
-        super(LoggerHandler, self).handleError(record)
+        super().handleError(record)
         raise LoggingException(record)
 
     def emit(self, record):

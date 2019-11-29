@@ -4,7 +4,7 @@ from dvc.utils import dvc_walk
 from dvc.utils.compat import open
 
 
-class BaseTree(object):
+class BaseTree:
     """Abstract class to represent access to files"""
 
     @property

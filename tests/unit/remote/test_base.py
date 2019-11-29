@@ -7,7 +7,7 @@ from dvc.remote.base import RemoteCmdError
 from dvc.remote.base import RemoteMissingDepsError
 
 
-class TestRemoteBASE(object):
+class TestRemoteBASE:
     REMOTE_CLS = RemoteBASE
 
 

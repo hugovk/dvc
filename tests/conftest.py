@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import os
 
 import mockssh
@@ -81,7 +79,7 @@ def dvc_repo(repo_dir):
 here = os.path.abspath(os.path.dirname(__file__))
 
 user = "user"
-key_path = os.path.join(here, "{0}.key".format(user))
+key_path = os.path.join(here, "{}.key".format(user))
 
 
 @pytest.fixture

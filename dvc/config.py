@@ -1,5 +1,4 @@
 """DVC config objects."""
-from __future__ import unicode_literals
 
 import copy
 import errno
@@ -28,7 +27,7 @@ class ConfigError(DvcException):
     """
 
     def __init__(self, msg, cause=None):
-        super(ConfigError, self).__init__(
+        super().__init__(
             "config file error: {}".format(msg), cause=cause
         )
 
@@ -42,7 +41,7 @@ class NoRemoteError(ConfigError):
             "    dvc {} -r <name>\n".format(command)
         )
 
-        super(NoRemoteError, self).__init__(msg, cause=cause)
+        super().__init__(msg, cause=cause)
 
 
 def supported_cache_type(types):
@@ -85,7 +84,7 @@ def Choices(*choices):
     return Any(*choices, msg="expected one of {}".format(",".join(choices)))
 
 
-class Config(object):  # pylint: disable=too-many-instance-attributes
+class Config:  # pylint: disable=too-many-instance-attributes
     """Class that manages configuration files for a dvc repo.
 
     Args:

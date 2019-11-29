@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import errno
 import logging
 import os
@@ -13,7 +11,7 @@ from dvc.utils.compat import str
 logger = logging.getLogger(__name__)
 
 
-class System(object):
+class System:
     @staticmethod
     def is_unix():
         return os.name != "nt"
@@ -144,7 +142,7 @@ class System(object):
                 ret = System._reflink_linux(source, link_name)
             else:
                 ret = -1
-        except IOError:
+        except OSError:
             ret = -1
 
         if ret != 0:
@@ -243,7 +241,7 @@ class System(object):
 
         try:
             select.select([sys.stdin], [], [], timeout)
-        except select.error:
+        except OSError:
             pass
 
     @staticmethod

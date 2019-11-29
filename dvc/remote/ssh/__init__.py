@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import errno
 import getpass
 import io
@@ -52,7 +50,7 @@ class RemoteSSH(RemoteBASE):
     DEFAULT_CACHE_TYPES = ["copy"]
 
     def __init__(self, repo, config):
-        super(RemoteSSH, self).__init__(repo, config)
+        super().__init__(repo, config)
         url = config.get(Config.SECTION_REMOTE_URL)
         if url:
             parsed = urlparse(url)
@@ -263,8 +261,7 @@ class RemoteSSH(RemoteBASE):
     def list_cache_paths(self):
         with self.ssh(self.path_info) as ssh:
             # If we simply return an iterator then with above closes instantly
-            for path in ssh.walk_files(self.path_info.path):
-                yield path
+            yield from ssh.walk_files(self.path_info.path)
 
     def walk_files(self, path_info):
         with self.ssh(path_info) as ssh:
@@ -283,7 +280,7 @@ class RemoteSSH(RemoteBASE):
                 try:
                     channel.stat(path)
                     ret.append(True)
-                except IOError as exc:
+                except OSError as exc:
                     if exc.errno != errno.ENOENT:
                         raise
                     ret.append(False)

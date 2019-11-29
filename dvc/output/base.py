@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import logging
 from copy import copy
 
@@ -20,29 +18,29 @@ logger = logging.getLogger(__name__)
 class OutputDoesNotExistError(DvcException):
     def __init__(self, path):
         msg = "output '{}' does not exist".format(path)
-        super(OutputDoesNotExistError, self).__init__(msg)
+        super().__init__(msg)
 
 
 class OutputIsNotFileOrDirError(DvcException):
     def __init__(self, path):
         msg = "output '{}' is not a file or directory".format(path)
-        super(OutputIsNotFileOrDirError, self).__init__(msg)
+        super().__init__(msg)
 
 
 class OutputAlreadyTrackedError(DvcException):
     def __init__(self, path):
         msg = "output '{}' is already tracked by scm (e.g. git)".format(path)
-        super(OutputAlreadyTrackedError, self).__init__(msg)
+        super().__init__(msg)
 
 
 class OutputIsStageFileError(DvcException):
     def __init__(self, path):
-        super(OutputIsStageFileError, self).__init__(
+        super().__init__(
             "Stage file '{}' cannot be an output.".format(path)
         )
 
 
-class OutputBase(object):
+class OutputBase:
     IS_DEPENDENCY = False
 
     REMOTE = RemoteBASE

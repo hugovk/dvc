@@ -1,5 +1,4 @@
 """Handle import compatibility between Python 2 and Python 3"""
-from __future__ import absolute_import
 
 import errno
 import os
@@ -98,7 +97,7 @@ def _makedirs(name, mode=0o777, exist_ok=False):
 def ignore_file_not_found():
     try:
         yield
-    except IOError as exc:
+    except OSError as exc:
         if exc.errno != errno.ENOENT:
             raise
 

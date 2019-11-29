@@ -18,7 +18,7 @@ from tests.utils import to_posixpath
 
 class TestDvcIgnore(TestDvc):
     def setUp(self):
-        super(TestDvcIgnore, self).setUp()
+        super().setUp()
 
     def _get_all_paths(self):
 

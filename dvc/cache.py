@@ -1,5 +1,4 @@
 """Manages cache of a dvc repo."""
-from __future__ import unicode_literals
 
 import os
 from collections import defaultdict
@@ -10,7 +9,7 @@ from dvc.config import Config
 from dvc.utils.compat import builtin_str
 
 
-class CacheConfig(object):
+class CacheConfig:
     def __init__(self, config):
         self.config = config
 
@@ -60,7 +59,7 @@ def _make_remote_property(name):
     return cached_property(getter)
 
 
-class Cache(object):
+class Cache:
     """Class that manages cache locations of a dvc repo.
 
     Args:
@@ -106,7 +105,7 @@ class Cache(object):
     azure = _make_remote_property(Config.SECTION_CACHE_AZURE)
 
 
-class NamedCache(object):
+class NamedCache:
     def __init__(self):
         self._items = defaultdict(lambda: defaultdict(set))
         self.external = defaultdict(set)

@@ -1,5 +1,4 @@
 """Manages dvc remotes that user can use with push/pull/status commands."""
-from __future__ import unicode_literals
 
 import logging
 
@@ -11,7 +10,7 @@ from dvc.remote import Remote
 logger = logging.getLogger(__name__)
 
 
-class DataCloud(object):
+class DataCloud:
     """Class that manages dvc remotes.
 
     Args:

@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from dvc.utils.compat import FileNotFoundError, urlparse
 import io
 import logging
@@ -26,7 +24,7 @@ class RemoteHDFS(RemoteBASE):
     REQUIRES = {"pyarrow": "pyarrow"}
 
     def __init__(self, repo, config):
-        super(RemoteHDFS, self).__init__(repo, config)
+        super().__init__(repo, config)
         self.path_info = None
         url = config.get(Config.SECTION_REMOTE_URL)
         if not url:
@@ -143,7 +141,7 @@ class RemoteHDFS(RemoteBASE):
                     yield fd
                 else:
                     yield io.TextIOWrapper(fd, encoding=encoding)
-        except IOError as e:
+        except OSError as e:
             # Empty .errno and not specific enough error class in pyarrow,
             # see https://issues.apache.org/jira/browse/ARROW-6248
             if "file does not exist" in str(e):

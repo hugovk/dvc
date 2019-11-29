@@ -1,6 +1,3 @@
-from __future__ import absolute_import
-from __future__ import unicode_literals
-
 import os
 import posixpath
 import sys
@@ -95,11 +92,11 @@ class PathInfo(pathlib.PurePath):
                 else a
                 for a in args
             ]
-            return super(PathInfo, cls)._parse_args(args)
+            return super()._parse_args(args)
 
         @property
         def name(self):
-            return super(PathInfo, self).name.decode(fs_encoding)
+            return super().name.decode(fs_encoding)
 
         def __fspath__(self):  # noqa: F811
             return pathlib.PurePath.__str__(self).decode(fs_encoding)
@@ -123,7 +120,7 @@ class _URLPathInfo(PosixPathInfo):
     __unicode__ = __str__
 
 
-class _URLPathParents(object):
+class _URLPathParents:
     def __init__(self, src):
         self.src = src
         self._parents = self.src._path.parents
@@ -138,7 +135,7 @@ class _URLPathParents(object):
         return "<{}.parents>".format(self.src)
 
 
-class URLInfo(object):
+class URLInfo:
     DEFAULT_PORTS = {"http": 80, "https": 443, "ssh": 22, "hdfs": 0}
 
     def __init__(self, url):

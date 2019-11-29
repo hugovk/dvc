@@ -9,7 +9,7 @@ from dvc.remote.local import RemoteLOCAL
 from tests.utils import trees_equal
 
 
-class TestUnpackedDirStatusOptimization(object):
+class TestUnpackedDirStatusOptimization:
     @pytest.fixture(autouse=True)
     def setUp(self, dvc_repo, repo_dir):
         stages = dvc_repo.add(repo_dir.DATA_DIR)

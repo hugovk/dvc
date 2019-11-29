@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import logging
 import os
 
@@ -11,7 +9,7 @@ from dvc.utils import relpath
 logger = logging.getLogger(__name__)
 
 
-class DvcIgnore(object):
+class DvcIgnore:
     DVCIGNORE_FILE = ".dvcignore"
 
     def __call__(self, root, dirs, files):
@@ -71,7 +69,7 @@ class DvcIgnoreDirs(DvcIgnore):
         return self.basenames == other.basenames
 
 
-class DvcIgnoreFilter(object):
+class DvcIgnoreFilter:
     def __init__(self, root_dir, tree):
         self.tree = tree
         self.ignores = {DvcIgnoreDirs([".git", ".hg", ".dvc"])}

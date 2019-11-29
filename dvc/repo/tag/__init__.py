@@ -1,4 +1,4 @@
-class Tag(object):
+class Tag:
     def __init__(self, repo):
         self.repo = repo
 

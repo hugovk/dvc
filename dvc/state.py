@@ -1,5 +1,4 @@
 """Manages state database used for checksum caching."""
-from __future__ import unicode_literals
 
 import logging
 import os
@@ -29,7 +28,7 @@ class StateVersionTooNewError(DvcException):
     """Thrown when dvc version is older than the state database version."""
 
     def __init__(self, dvc_version, expected, actual):
-        super(StateVersionTooNewError, self).__init__(
+        super().__init__(
             "you are using an old version '{dvc_version}' of dvc that is "
             "using state file version '{expected}' which is not compatible "
             "with the state file version '{actual}' that is used in this "
@@ -39,7 +38,7 @@ class StateVersionTooNewError(DvcException):
         )
 
 
-class StateNoop(object):
+class StateNoop:
     files = []
 
     def save(self, path_info, checksum):
@@ -58,7 +57,7 @@ class StateNoop(object):
         pass
 
 
-class State(object):  # pylint: disable=too-many-instance-attributes
+class State:  # pylint: disable=too-many-instance-attributes
     """Class for the state database.
 
     Args:

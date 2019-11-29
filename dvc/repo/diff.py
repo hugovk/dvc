@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import os
 from errno import ENOENT
 
@@ -185,7 +183,7 @@ def _diff_dir(self, target, diff_dct):
             diff_dct[DIFF_DELETED], diff_dct[DIFF_B_OUTPUT]
         )
         result.update(_get_tree_changes(self, a_entries, b_entries))
-    except IOError as e:
+    except OSError as e:
         _file_not_exists(e, result)
     return result
 
@@ -207,7 +205,7 @@ def _diff_file(self, target, diff_dct):
                 self.cache.local.get(diff_dct[DIFF_B_OUTPUT].checksum)
             )
         result[DIFF_SIZE] = size
-    except IOError as e:
+    except OSError as e:
         _file_not_exists(e, result)
     return result
 

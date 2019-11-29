@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import filecmp
 import getpass
 import os
@@ -48,7 +46,7 @@ from tests.utils.httpd import StaticFileServer, ContentMD5Handler
 
 class TestRepro(TestDvc):
     def setUp(self):
-        super(TestRepro, self).setUp()
+        super().setUp()
 
         stages = self.dvc.add(self.FOO)
         self.assertEqual(len(stages), 1)
@@ -374,7 +372,7 @@ class TestReproDryNoExec(TestDvc):
 
 class TestReproChangedDeepData(TestReproChangedData):
     def setUp(self):
-        super(TestReproChangedDeepData, self).setUp()
+        super().setUp()
 
         self.file2 = "file2"
         self.file2_stage = self.file2 + ".dvc"
@@ -455,7 +453,7 @@ class TestReproPipeline(TestReproChangedDeepData):
 
 class TestReproPipelines(TestDvc):
     def setUp(self):
-        super(TestReproPipelines, self).setUp()
+        super().setUp()
 
         stages = self.dvc.add(self.FOO)
         self.assertEqual(len(stages), 1)
@@ -1090,7 +1088,7 @@ class TestReproExternalSSH(TestReproExternalBase):
         try:
             sftp.stat(path)
             sftp.remove(path)
-        except IOError:
+        except OSError:
             pass
 
         stdin, stdout, stderr = ssh.exec_command(
@@ -1104,7 +1102,7 @@ class TestReproExternalSSH(TestReproExternalBase):
 
 class TestReproExternalLOCAL(TestReproExternalBase):
     def setUp(self):
-        super(TestReproExternalLOCAL, self).setUp()
+        super().setUp()
         self.tmpdir = TestDvc.mkdtemp()
         ret = main(["config", "cache.type", "hardlink"])
         self.assertEqual(ret, 0)

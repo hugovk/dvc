@@ -611,7 +611,7 @@ class TestCmdRunWorkingDirectory(TestDvc):
         )
 
 
-class DeterministicRunBaseFixture(object):
+class DeterministicRunBaseFixture:
     def __init__(self, repo_dir, dvc_repo):
         self.out_file = "out"
         self.stage_file = self.out_file + ".dvc"
@@ -874,9 +874,7 @@ class TestNewRunShouldNotRemoveOutsOnPersist(TestRerunWithSameOutputs):
 
 class TestShouldNotCheckoutUponCorruptedLocalHardlinkCache(TestDvc):
     def setUp(self):
-        super(
-            TestShouldNotCheckoutUponCorruptedLocalHardlinkCache, self
-        ).setUp()
+        super().setUp()
         ret = main(["config", "cache.type", "hardlink"])
         self.assertEqual(ret, 0)
         self.dvc = DvcRepo(".")

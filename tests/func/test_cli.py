@@ -169,7 +169,7 @@ class TestFindRoot(TestDvc):
     def test(self):
         os.chdir("..")
 
-        class A(object):
+        class A:
             quiet = False
             verbose = True
 

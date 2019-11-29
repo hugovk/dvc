@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import itertools
 import json
 import logging
@@ -51,12 +49,12 @@ class DataCloudError(DvcException):
     """ Data Cloud exception """
 
     def __init__(self, msg):
-        super(DataCloudError, self).__init__("Data sync error: {}".format(msg))
+        super().__init__("Data sync error: {}".format(msg))
 
 
 class RemoteCmdError(DvcException):
     def __init__(self, remote, cmd, ret, err):
-        super(RemoteCmdError, self).__init__(
+        super().__init__(
             "{remote} command '{cmd}' finished with non-zero return code"
             " {ret}': {err}".format(remote=remote, cmd=cmd, ret=ret, err=err)
         )
@@ -65,7 +63,7 @@ class RemoteCmdError(DvcException):
 class RemoteActionNotImplemented(DvcException):
     def __init__(self, action, scheme):
         m = "{} is not supported by {} remote".format(action, scheme)
-        super(RemoteActionNotImplemented, self).__init__(m)
+        super().__init__(m)
 
 
 class RemoteMissingDepsError(DvcException):
@@ -74,13 +72,13 @@ class RemoteMissingDepsError(DvcException):
 
 class DirCacheError(DvcException):
     def __init__(self, checksum, cause=None):
-        super(DirCacheError, self).__init__(
+        super().__init__(
             "Failed to load dir cache for checksum: '{}'.".format(checksum),
             cause=cause,
         )
 
 
-class RemoteBASE(object):
+class RemoteBASE:
     scheme = "base"
     path_cls = URLInfo
     REQUIRES = {}

@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import logging
 import os
 import sys
@@ -18,7 +16,7 @@ from dvc.utils.pkg import PKG
 logger = logging.getLogger(__name__)
 
 
-class Updater(object):  # pragma: no cover
+class Updater:  # pragma: no cover
     URL = "https://updater.dvc.org"
     UPDATER_FILE = "updater"
     TIMEOUT = 24 * 60 * 60  # every day

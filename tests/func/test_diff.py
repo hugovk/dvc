@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import os
 
 import dvc.repo.diff as diff
@@ -10,7 +8,7 @@ from tests.basic_env import TestDvcGit
 
 class TestDiff(TestDvcGit):
     def setUp(self):
-        super(TestDiff, self).setUp()
+        super().setUp()
 
         self.new_file = "new_test_file"
         self.create(self.new_file, self.new_file)
@@ -58,7 +56,7 @@ class TestDiffCmdLine(TestDiff):
 
 class TestDiffDir(TestDvcGit):
     def setUp(self):
-        super(TestDiffDir, self).setUp()
+        super().setUp()
 
         stage = self.dvc.add(self.DATA_DIR)[0]
         self.git.index.add([self.DATA_DIR + ".dvc"])
@@ -118,7 +116,7 @@ class TestDiffDirRepoDeletedFile(TestDiffDir):
     maxDiff = None
 
     def setUp(self):
-        super(TestDiffDirRepoDeletedFile, self).setUp()
+        super().setUp()
 
         self.b_ref = self.a_ref
         tmp = self.new_checksum
@@ -155,7 +153,7 @@ class TestDiffDirRepoDeletedFile(TestDiffDir):
 
 class TestDiffFileNotFound(TestDiffDir):
     def setUp(self):
-        super(TestDiffFileNotFound, self).setUp()
+        super().setUp()
         self.unknown_file = "unknown_file_" + str(id(self))
 
     def test(self):
@@ -167,7 +165,7 @@ class TestDiffModifiedFile(TestDiff):
     maxDiff = None
 
     def setUp(self):
-        super(TestDiffModifiedFile, self).setUp()
+        super().setUp()
 
         self.old_checksum = self.new_checksum
         self.new_file_content = "new_test_file_bigger_content_123456789"
@@ -202,7 +200,7 @@ class TestDiffDirWithFile(TestDiffDir):
     maxDiff = None
 
     def setUp(self):
-        super(TestDiffDirWithFile, self).setUp()
+        super().setUp()
 
         self.a_ref = self.git.git.rev_parse(self.git.head.commit, short=True)
         self.old_checksum = self.new_checksum
@@ -253,14 +251,14 @@ class TestDiffCmdMessage(TestDiff):
         )
         self.assertEqual(ret, 0)
 
-        msg1 = "dvc diff from {0} to {1}".format(
+        msg1 = "dvc diff from {} to {}".format(
             self.git.git.rev_parse(self.test_dct[diff.DIFF_A_REF], short=True),
             self.git.git.rev_parse(self.test_dct[diff.DIFF_B_REF], short=True),
         )
-        msg2 = "diff for '{0}'".format(
+        msg2 = "diff for '{}'".format(
             self.test_dct[diff.DIFF_LIST][0][diff.DIFF_TARGET]
         )
-        msg3 = "+{0} with md5 {1}".format(
+        msg3 = "+{} with md5 {}".format(
             self.test_dct[diff.DIFF_LIST][0][diff.DIFF_TARGET],
             self.test_dct[diff.DIFF_LIST][0][diff.DIFF_NEW_CHECKSUM],
         )

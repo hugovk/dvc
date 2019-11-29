@@ -126,7 +126,7 @@ def _should_test_ssh():
 
     try:
         check_output(["ssh", "-o", "BatchMode=yes", "127.0.0.1", "ls"])
-    except (CalledProcessError, IOError):
+    except (CalledProcessError, OSError):
         return False
 
     return True
@@ -140,7 +140,7 @@ def _should_test_hdfs():
         check_output(
             ["hadoop", "version"], shell=True, executable=os.getenv("SHELL")
         )
-    except (CalledProcessError, IOError):
+    except (CalledProcessError, OSError):
         return False
 
     p = Popen(
@@ -435,7 +435,7 @@ class TestRemoteLOCAL(TestDataCloudBase):
         return RemoteLOCAL
 
     def test(self):
-        super(TestRemoteLOCAL, self).test()
+        super().test()
         self.assertTrue(os.path.isdir(self.dname))
 
 
@@ -815,7 +815,7 @@ class TestCheckSumRecalculation(TestDvc):
 
 class TestShouldWarnOnNoChecksumInLocalAndRemoteCache(TestDvc):
     def setUp(self):
-        super(TestShouldWarnOnNoChecksumInLocalAndRemoteCache, self).setUp()
+        super().setUp()
 
         cache_dir = self.mkdtemp()
         ret = main(["add", self.FOO])

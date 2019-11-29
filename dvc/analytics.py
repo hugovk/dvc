@@ -1,5 +1,4 @@
 """Collect and send usage analytics"""
-from __future__ import unicode_literals
 
 import errno
 import json
@@ -14,7 +13,7 @@ from dvc.utils.compat import str
 logger = logging.getLogger(__name__)
 
 
-class Analytics(object):
+class Analytics:
     """Class for collecting and sending usage analytics.
 
     Args:

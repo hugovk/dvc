@@ -1,5 +1,3 @@
-from __future__ import unicode_literals, division
-
 import logging
 from datetime import timedelta
 from functools import wraps
@@ -64,7 +62,7 @@ def _upload_to_bucket(
         bytes=True,
         disable=no_progress_bar,
     ) as pbar:
-        with io.open(from_file, mode="rb") as fobj:
+        with open(from_file, mode="rb") as fobj:
             raw_read = fobj.read
 
             def read(size=chunk_size):
@@ -84,7 +82,7 @@ class RemoteGS(RemoteBASE):
     PARAM_CHECKSUM = "md5"
 
     def __init__(self, repo, config):
-        super(RemoteGS, self).__init__(repo, config)
+        super().__init__(repo, config)
 
         url = config.get(Config.SECTION_REMOTE_URL, "gs:///")
         self.path_info = self.path_cls(url)
@@ -168,7 +166,7 @@ class RemoteGS(RemoteBASE):
             bytes=True,
             disable=no_progress_bar,
         ) as pbar:
-            with io.open(to_file, mode="wb") as fobj:
+            with open(to_file, mode="wb") as fobj:
                 raw_write = fobj.write
 
                 def write(byte_string):

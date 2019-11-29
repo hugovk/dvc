@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import os
 
 from git import Repo
@@ -64,7 +62,7 @@ class TestSCMGitSubmodule(TestGitSubmodule):
         self.assertTrue("foo" in self.git.git.ls_files())
 
 
-class TestIgnore(object):
+class TestIgnore:
     @staticmethod
     def _count_gitignore_entries(string):
         lines = get_gitignore_content()
